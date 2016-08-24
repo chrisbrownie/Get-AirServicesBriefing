@@ -92,7 +92,7 @@ switch ($type) {
         foreach ($ad in $results.GetEnumerator()) {
 
             $briefing = $ad.value | Out-String
-            $chunk = $briefing.Substring($briefing.IndexOf("TAF"))
+            $chunk = $briefing.Substring($briefing.IndexOf("ATIS"))
 
             # Split by newline and remove the last two
             $chunk = $chunk -split "`n" | Select-Object -SkipLast 2
