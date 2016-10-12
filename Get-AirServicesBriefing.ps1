@@ -92,7 +92,11 @@ switch ($type) {
         foreach ($ad in $results.GetEnumerator()) {
 
             $briefing = $ad.value | Out-String
-            $chunk = $briefing.Substring($briefing.IndexOf("ATIS"))
+            try { 
+                $chunk = $briefing.Substring($briefing.IndexOf("ATIS"))
+            } catch {
+                throw "Got the briefing, but could not retrieve the ATIS! Does this location have automatic ATIS?"
+            }
 
             # Split by newline and remove the last two
             $chunk = $chunk -split "`n" | Select-Object -SkipLast 2
